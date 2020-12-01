@@ -19,7 +19,7 @@
         {% if festivals %}
         <h3>Performing in festivals: </h3>
         {% for festival in festivals %}
-        <a href="{% url 'festivals-show' festival_Id=festival.id %}"><h4>{{ festival.nazov }}</h4></a>
+        <a href="{% url 'festivals-show' festival_Id=festival.id %}"><h4>{{ festival.nazov }} {{ festival.rocnik }}</h4></a>
         
         {% endfor %}
         {% endif %}
