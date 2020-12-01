@@ -45,10 +45,10 @@ class NewInterpretForm(ModelForm):
         model = models.t_interpret
         fields = ['nazov', 'datum_vzniku', 'clenovia', 'albumy']
         labels ={
-             "nazov" = "Name",
-             "datum_vzniku" = "Date of formation",
-             "clenovia" = "Members",
-             "albumy" = "Albums",
+            "nazov": "name",
+            "datum_vzniku" = "Date of formation",
+            "clenovia" = "Members",
+            "albumy" = "Albums",
         }
         widgets ={
             'datum_vzniku': DateInput(format=('%d/%d/%Y'), attrs={'type': 'date'})
