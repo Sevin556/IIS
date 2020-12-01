@@ -12,8 +12,9 @@
 			 <p>
                 {% if user.is_authenticated and request.user|has_group:"organiser" or request.user|has_group:"admin"%}
                  <a class="btn btn-primary btn-large" href="{% url 'festivals-new' %}">Add New Festival</a>
+		 <a class="btn btn-s btn-warning" href="{% url 'interprets-show' %}">Show interprets</a>
                 {% endif %}
-                 <a class="btn btn-s btn-warning" href="{% url 'interprets-show' %}">Show interprets</a>
+                 
              </p>
          </div>
      </header>
