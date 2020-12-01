@@ -1,1 +1,1 @@
-web: gunicron IIS.wsgi --log-file -
+web: gunicorn IIS.wsgi --log-file -
