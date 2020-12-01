@@ -36,7 +36,7 @@
                         {% else %}
                         <div class="text-danger">No interprets announced at the moment</div>
                         {% endif %}
-                        {% if user.id == festival.vytvoril.id %}
+                        {% if user.id == festival.vytvoril.id or request.user|has_group:"admin" %}
                         <div class="row">
                             <a class="btn btn-s btn-info" href="{% url 'festivals-edit-interprets' festival_Id=festival.id  %}">Edit interprets</a>
                         </div>
@@ -62,7 +62,7 @@
                             {% endfor %}
                             {% endif %}
                             
-                            {% if user.id == festival.vytvoril.id %}
+                            {% if user.id == festival.vytvoril.id or request.user|has_group:"admin" %}
                             <a class="btn btn-s btn-warning" href="{% url 'festivals-edit-stage' stage_Id=stage.id festival_Id=festival.id %}">Edit</a>
                             <a class="btn btn-s btn-danger" href="{% url 'festivals-delete-stage' stage_Id=stage.id festival_Id=festival.id %}">Delete</a>
                             <a class="btn btn-s btn-danger" href="{% url 'festivals-manage-program' stage_Id=stage.id festival_Id=festival.id %}">Manage stage</a>
@@ -73,7 +73,7 @@
                         <div class="text-danger">Stages not created at the moment</div>
                         {% endif %}
                         </div>
-                        {% if user.id == festival.vytvoril.id %}
+                        {% if user.id == festival.vytvoril.id or request.user|has_group:"admin" %}
                     <div class="row">
                         <a class="btn btn-s btn-info" style="margin-top: 10px;" href="{% url 'festivals-add-stage' festival_Id=festival.id  %}" >Add Stage</a>
                     </div>
@@ -83,7 +83,7 @@
                         
                     
                        
-                        {% if user.id == festival.vytvoril.id %}
+                        {% if user.id == festival.vytvoril.id or request.user|has_group:"admin" %}
                             <a style="margin-bottom: 10px;" class="btn btn-s btn-info" href="{% url 'festivals-create-ticket-festival' festival_Id=festival.id %}">Create tickets</a>
                         {% endif %}
                     <div class="row">
