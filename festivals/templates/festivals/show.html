@@ -95,13 +95,14 @@
                     </div>
                                              
             </div>
+        <a href="/">Go back</a>
                 {% if user.id == festival.vytvoril.id or request.user|has_group:"admin" %}
                     <div class="text-right d-inline">
                         <a class="btn btn-s btn-warning"href="{% url 'festivals-edit' festival_Id=festival.id  %}">Edit info</a>
                         <a class="btn btn-s btn-danger" href="{% url 'festivals-delete' festival_Id=festival.id  %}" >Delete festival</a>
                     </div>
                 {% endif %}
-        <a href="/">Go back</a>
+        
    </div>             
 
 {% endblock content %}
