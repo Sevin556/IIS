@@ -731,3 +731,18 @@ def createInterpret(request):
     else:
         form = NewInterpretForm()
         return render(request, 'festivals/createInterprets.html', {'form': form})
+    
+ def editInterpret(request, interpret_Id):
+    interpret = t_interpret.objects.get(id=interpret_Id)
+    if request.method == 'POST':
+            form = NewInterpretForm(request.POST, instance=interpret)
+            if form.is_valid():
+                form.save()
+                messages.success(request,"Interpret edited")
+                return redirect('interpret-profile', interpret_Id=interpret_Id)
+            else:
+                messages.warning(request,"Enter valid data!")
+                return render(request, 'festivals/editInterpret.html', {'form': form, 'interpret': interpret})
+    else:
+        form = NewInterpretForm(instance=interpret)
+        return render(request, 'festivals/editInterpret.html', {'form': form, 'interpret': interpret})
