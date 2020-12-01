@@ -46,9 +46,9 @@ class NewInterpretForm(ModelForm):
         fields = ['nazov', 'datum_vzniku', 'clenovia', 'albumy']
         labels ={
             "nazov": "name",
-            "datum_vzniku" = "Date of formation",
-            "clenovia" = "Members",
-            "albumy" = "Albums",
+            "datum_vzniku": "Date of formation",
+            "clenovia": "Members",
+            "albumy": "Albums",
         }
         widgets ={
             'datum_vzniku': DateInput(format=('%d/%d/%Y'), attrs={'type': 'date'})
