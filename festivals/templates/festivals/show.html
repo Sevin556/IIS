@@ -65,7 +65,7 @@
                             {% if user.id == festival.vytvoril.id or request.user|has_group:"admin" %}
                             <a class="btn btn-s btn-warning" href="{% url 'festivals-edit-stage' stage_Id=stage.id festival_Id=festival.id %}">Edit</a>
                             <a class="btn btn-s btn-danger" href="{% url 'festivals-delete-stage' stage_Id=stage.id festival_Id=festival.id %}">Delete</a>
-                            <a class="btn btn-s btn-danger" href="{% url 'festivals-manage-program' stage_Id=stage.id festival_Id=festival.id %}">Manage stage</a>
+                            <a class="btn btn-s btn-primary" href="{% url 'festivals-manage-program' stage_Id=stage.id festival_Id=festival.id %}">Manage stage</a>
                             {% endif %}
                         </div>
                         {% endfor %}
