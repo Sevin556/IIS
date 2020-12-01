@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '^+%bn(k*t=71+nb*k9%p(%5p&c0)*%5s#irb^92sggo-x=v-o^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = [".run-eu-central1.goorm.io", "127.0.0.1:3306"]
+ALLOWED_HOSTS = ["https://iis-project609.herokuapp.com/" ,".run-eu-central1.goorm.io", "127.0.0.1:3306"]
 
 
 # Application definition
