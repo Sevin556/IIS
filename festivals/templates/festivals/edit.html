@@ -1,0 +1,22 @@
+{% extends "festivals/header.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <h1 style="text-align: center">Edit Festival {{ festival.nazov }}</h1>
+        <div style="width: 30%; margin: 25px auto;">
+            <form action="{% url 'festivals-edit' festival_Id=festival.id %}" method="POST">
+                 {% csrf_token %}
+                <div class="form-group">
+                    {{ form|crispy }}
+                    <button class="btn btn-lg btn-primary btn-block">Submit</button>
+                </div>
+            </form>
+            <a href="{% url 'festivals-show' festival_Id=festival.id %}">Go Back</a>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

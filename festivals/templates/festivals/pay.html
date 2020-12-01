@@ -1,0 +1,16 @@
+{% extends "festivals/header.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container">
+    <div class="jumbotron">
+        <h1 style="text-align: center">Payment page</h1>
+        <div style="width: 30%; margin: 25px auto;">
+            There would be payment methods, gate etc... but for project purpose we don´t need that. We just set reservation to status Paid
+            <a class="row" href="{% url 'festivals-profile' user_Id=owner_Id %}">Okay</a>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

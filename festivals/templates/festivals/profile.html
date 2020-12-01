@@ -1,0 +1,63 @@
+
+{% extends "festivals/header.html" %}
+{% load template_auth %}
+{% block content %}
+<div class="container text-center">
+    <header class="jumbotron">
+ <h1>{{  p_user.additional.display_name }}</h1>
+     <div class="row">
+          
+                
+                   <div class="caption">
+                       <h4>Email: {{ p_user.username }}</h4>
+                       <h4>First name: {{ p_user.first_name }}</h4>
+                       <h4>Last name: {{ p_user.last_name }}</h4>
+                       
+                   </div>
+                    {% if request.user|has_group:"admin" or request.user == p_user %}
+                        <a class="btn btn-s btn-warning"href="{% url 'festivals-edit-profile' user_Id=p_user.id %}">Edit</a>
+                    {% endif %}
+                    
+                    {% if request.user|has_group:"admin" %}
+                       
+                            <div class="row" style="margin-top: 10px;">
+                                   
+                                       {% if p_user|has_group:"cashier" %}
+                                       <a href="{% url 'rem-role'  user_Id=p_user.id role='cashier' %}" class="btn btn-primary">Remove from cashier group</a>
+                                       {% else %}
+                                       <a href="{% url 'add-role' user_Id=p_user.id role='cashier' %}" class="btn btn-primary">Add to cashier group</a>
+                                       {% endif %}
+                                       {% if p_user|has_group:"organiser" %}
+                                       <a href="{% url 'rem-role' user_Id=p_user.id role='organiser' %}" class="btn btn-primary">Remove from organiser group</a>
+                                       {% else %}
+                                       <a href="{% url 'add-role' user_Id=p_user.id role='organiser' %}" class="btn btn-primary">Add to organiser group</a>
+                                       {% endif %}
+                                       {% if p_user|has_group:"admin" %}
+                                       <a href="{% url 'rem-role' user_Id=p_user.id role='admin' %}" class="btn btn-primary">Remove from admin group</a>
+                                       {% else %}
+                                       <a href="{% url 'add-role' user_Id=p_user.id role='admin' %}" class="btn btn-primary">Add to admin group</a>
+                                       {% endif %}
+                                  
+                           
+                        </div>
+                    {% endif %}
+                    
+                    {% if content %}
+                    <h2>
+                        My orders
+                    </h2>
+                    {% for order,festival in content %}
+                    <p>
+                        <a href="{% url 'festivals-show-reservation' festival_Id=festival.id res_Id=order.id %}"> Order for {{festival.nazov}}</a> <br>
+                       State:{{ order.stav }}
+                    </p>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+        
+                
+            </header>
+        </div>
+
+
+{% endblock content %}

@@ -1,0 +1,59 @@
+
+{% extends "festivals/header.html" %}
+{% load template_auth %}
+{% block content %}
+<div class="container text-center jumbotron">
+    <h2>
+        Users:
+    </h2>
+    <form class="form-inline" action="{% url 'festivals-showUsers' %}" method="POST">
+            {% csrf_token %}
+        <div style="width: 30%; margin: 15px auto;">
+            <input type="text" class="form-control" name="user_email" placeholder="Find user by email...">
+            <button class="btn btn-sm btn-primary" type="sumbit">Search <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+  <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+</svg></button>
+        </div>
+
+    </form>
+    
+    {% if foundUser %}
+        <a href="/users/show/">Show all</a>
+        <div class="row">
+                <div class="row">
+                       <div class="caption col-md-3 col-sm-6">
+                           <h4>{{ foundUser.username }} <br> {{ foundUser.additional.display_name }}</h4>
+                           {% if foundUser|has_group:"cashier" %}
+                           <a href="{% url 'rem-role' user_Id=foundUser.id role='cashier' %}" class="btn btn-primary">Remove from cashier group</a>
+                           {% else %}
+                           <a href="{% url 'add-role' user_Id=foundUser.id role='cashier' %}" class="btn btn-primary">Add to cashier group</a>
+                           {% endif %}
+                           {% if foundUser|has_group:"organiser" %}
+                           <a href="{% url 'rem-role' user_Id=foundUser.id role='organiser' %}" class="btn btn-primary">Remove from organiser group</a>
+                           {% else %}
+                           <a href="{% url 'add-role' user_Id=foundUser.id role='organiser' %}" class="btn btn-primary">Add to organiser group</a>
+                           {% endif %}
+                           {% if foundUser|has_group:"admin" %}
+                           <a href="{% url 'rem-role' user_Id=foundUser.id role='admin' %}" class="btn btn-primary">Remove from admin group</a>
+                           {% else %}
+                           <a href="{% url 'add-role' user_Id=foundUser.id role='admin' %}" class="btn btn-primary">Add to admin group</a>
+                           {% endif %}
+                       </div>
+                </div>
+        </div>
+    
+    {% else %}
+     <div class="row text-center" >
+        {% if myUsers %}
+             <dl>
+             {% for myUser in myUsers %}
+                 <dt><a href="{% url 'festivals-profile' user_Id=myUser.id %}">{{ myUser.username }}</a></dt>
+                 <dd>{{ myUser.additional.display_name }}</dd>
+             {% endfor %}
+             </dl>
+		{% endif %}
+    </div>
+    {% endif %}
+</div>
+{% endblock content %}

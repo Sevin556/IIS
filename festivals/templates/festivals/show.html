@@ -1,0 +1,108 @@
+{% extends "festivals/header.html" %}
+{% load template_auth %}
+{% block content %}
+<div class="container text-center"> 
+    <div class="thumbnail">
+        <header class="jumbotron">
+                
+                
+                    <h1>{{ festival.nazov }} {{ festival.rocnik }}</h1>
+                    <h5>{{ festival.zaciatok.day }}.{{ festival.zaciatok.month }}.-{{ festival.koniec.day }}.{{ festival.koniec.month }}.</h5>
+                    <h4>{{ festival.koniec.year }}</h4>   
+                    
+                    <hr>
+            <p class="lead">{{ festival.popis }}</p>
+            </header>
+                    <div>
+                        <h2>Location:</h2>
+                        <h4>
+                            {{ festival.miesto }}
+                        </h4>
+                        
+                        <h2>Capacity:</h2>
+                        <h4>
+                            {{ festival.kapacita }}
+                        </h4>
+                        
+                        <h2>Interprets:</h2>
+
+                        {% if interprets %}
+                        {% for interpret in interprets %}
+                        
+                          <a href="{% url 'interpret-profile' interpret_Id=interpret.id %}" style="text-decoration: none; color: black">{{ interpret.nazov }},</a>  
+                        
+                            
+                        {% endfor %}
+                        {% else %}
+                        <div class="text-danger">No interprets announced at the moment</div>
+                        {% endif %}
+                        {% if user.id == festival.vytvoril.id %}
+                        <div class="row">
+                            <a class="btn btn-s btn-info" href="{% url 'festivals-edit-interprets' festival_Id=festival.id  %}">Edit interprets</a>
+                        </div>
+                        
+                        {% endif %}
+                        
+                        <h2>Stages:</h2>
+                        {% if stages %}
+
+                        {% for stage in stages %}
+                        <div class="row">
+                            <a style="text-decoration: none;" href="{% url 'festivals-stage-info' stage_Id=stage.id festival_Id=festival.id %}">{{ stage.nazov}}</a>
+                           
+                            
+                            {% if programs %}
+                            {{ programs|get_item:stage.nazov}}
+                            {% for  item in interprets %}
+                            <h4>
+
+                                Program je {{item.nazov}}
+                            </h4> 
+
+                            {% endfor %}
+                            {% endif %}
+                            
+                            {% if user.id == festival.vytvoril.id %}
+                            <a class="btn btn-s btn-warning" href="{% url 'festivals-edit-stage' stage_Id=stage.id festival_Id=festival.id %}">Edit</a>
+                            <a class="btn btn-s btn-danger" href="{% url 'festivals-delete-stage' stage_Id=stage.id festival_Id=festival.id %}">Delete</a>
+                            <a class="btn btn-s btn-danger" href="{% url 'festivals-manage-program' stage_Id=stage.id festival_Id=festival.id %}">Manage stage</a>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        <div class="text-danger">Stages not created at the moment</div>
+                        {% endif %}
+                        </div>
+                        {% if user.id == festival.vytvoril.id %}
+                    <div class="row">
+                        <a class="btn btn-s btn-info" style="margin-top: 10px;" href="{% url 'festivals-add-stage' festival_Id=festival.id  %}" >Add Stage</a>
+                    </div>
+                     
+                        {% endif %}
+                    <h2>Tickets:</h2>
+                        
+                    
+                       
+                        {% if user.id == festival.vytvoril.id %}
+                            <a style="margin-bottom: 10px;" class="btn btn-s btn-info" href="{% url 'festivals-create-ticket-festival' festival_Id=festival.id %}">Create tickets</a>
+                        {% endif %}
+                    <div class="row">
+                        {% if tickets %}
+                            <a class="btn btn-lg btn-success" href="{% url 'festivals-buy-ticket' festival_Id=festival.id %}">Purchase tickets!</a>
+                        {% else %}
+                    <div class="text-danger">Tickets are not available at the moment!</div>
+                        {% endif %} 
+                    </div>
+                                             
+            </div>
+	 
+                {% if user.id == festival.vytvoril.id %}
+                    <div class="text-right d-inline">
+                        <a class="btn btn-s btn-warning"href="{% url 'festivals-edit' festival_Id=festival.id  %}">Edit info</a>
+                        <a class="btn btn-s btn-danger" href="{% url 'festivals-delete' festival_Id=festival.id  %}" >Delete festival</a>
+                    </div>
+                {% endif %}
+        <a href="/">Go back</a>
+   </div>             
+
+{% endblock content %}

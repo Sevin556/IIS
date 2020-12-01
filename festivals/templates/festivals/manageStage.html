@@ -1,0 +1,66 @@
+{% extends "festivals/header.html" %}
+{% block content %}
+<div class="container text-center"> 
+    <div class="thumbnail">
+                <h2>Interprets performing on stage {{ stage.nazov }}:</h2>
+                 {% if performers %}
+                        {% for interpret,program in performers %}
+                        <div class="row d-inline">
+                            <form action="{% url 'festivals-edit-interpret-stage' stage_Id=stage.id program_Id=program.id festival_Id=festival.id %}" method="POST">
+                                {% csrf_token %}
+                                
+                                    {{ interpret.nazov }}:
+                                
+                               <label for="{{program.id}}startdate">Start date</label>
+                                <input type="date" min='{{festival.zaciatok|date:"Y-m-d"}}' max='{{festival.koniec|date:"Y-m-d"}}' name="{{ program.id }}startdate" value='{{program.zaciatok|date:"Y-m-d"}}'>
+                                <label for="{{ interpret.nazov }}start">Start time</label>
+                                <input type="time" name="{{ program.id }}start" value='{{ program.zaciatok|date:"H:i"}}'>  
+                                <label for="{{ program.id }}enddate">End date</label>
+                                <input type="date" min='{{festival.zaciatok|date:"Y-m-d"}}' max='{{festival.koniec|date:"Y-m-d"}}' name="{{ program.id }}enddate" value='{{program.zaciatok|date:"Y-m-d"}}'>
+                                <label for="{{ program.id }}end">End time</label>
+                                <input type="time" name="{{ program.id }}end" value='{{ program.koniec|date:"H:i"}}'> 
+                            
+                            <a class="btn btn-danger" href="{% url 'festivals-delete-from-stage' stage_Id=stage.id program_Id=program.id festival_Id=festival.id %}">Delete</a>                                
+                            <button class="btn btn-md btn-warning btn-primary">Save</button>
+
+                            </form>
+                        </div>
+                            
+                        {% endfor %}
+                        {% endif %}        
+                    <hr>
+                    <h2>Festival interprets:</h2>
+                    <div>
+                        {% if interprets %}
+                        {% for interpret in interprets %}
+                        <div class="row">
+                            {{ interpret.nazov }}
+                            <form action="{% url 'festivals-add-to-stage' stage_Id=stage.id interpret_Id=interpret.id festival_Id=festival.id %}" method="POST">
+                                                 {% csrf_token %}
+
+                                <label for="{{ interpret.nazov }}day">Start</label>
+                                <input type="date" min='{{festival.zaciatok|date:"Y-m-d"}}' max='{{festival.koniec|date:"Y-m-d"}}' name="{{ interpret.nazov }}startdate" value='{{festival.zaciatok|date:"Y-m-d"}}'>
+                                <label for="{{ interpret.nazov }}end">Start time</label>
+                                <input type="time" name="{{ interpret.nazov }}start" value="00:00">  
+                                <label for="{{ interpret.nazov }}end">End date</label>
+                                <input type="date" min='{{festival.zaciatok|date:"Y-m-d"}}' max='{{festival.koniec|date:"Y-m-d"}}' name="{{ interpret.nazov }}enddate" value='{{festival.zaciatok|date:"Y-m-d"}}'>
+                                <label for="{{ interpret.nazov }}end">End time</label>
+                                <input type="time" name="{{ interpret.nazov }}end" value="00:00">  
+                                <button class="btn btn-md btn-success ">Submit</button>
+                            </form>
+                            
+        
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        <a class="btn btn-s btn-warning" href="{% url 'festivals-edit-interprets' festival_Id=festival.id  %}">Add more impertrets to festival</a>
+                        {% endif %}
+                    </div>
+                    <div class="row">
+                        <a class="btn btn-s btn-success mt-5" href="{% url 'festivals-show' festival_Id=festival.id  %}">Done</a>
+                    </div>
+                       
+                </div>
+	</div>
+
+{% endblock content %}

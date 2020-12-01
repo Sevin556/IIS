@@ -1,0 +1,39 @@
+{% extends "festivals/header.html" %}
+{% load template_auth %}
+{% block content %}
+<div class="container text-center"> 
+    <div class="jumbotron">
+        <h1>Interprets:</h1>
+                <form class="form-inline" action="{% url 'interprets-show' %}" method="POST">
+                  {% csrf_token %}
+                    <input type="text" class="form-control" name="interpret_name" placeholder="Look for interpret ...">
+<button class="btn btn-sm btn-primary" type="sumbit">Search <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+  <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+</svg></button>
+              </form>
+                <a style="margin-top: 10px;" class="btn btn-s btn-success" href="{% url 'create-interpret'%}">Add new interpret</a>
+                    
+                    <hr>
+                    {% if user.is_authenticated and request.user|has_group:"organiser" or request.user|has_group:"admin" %}
+                    
+                    {% endif %}
+                    <div>
+                        {% if interprets %}
+                        {% for interpret in interprets %}
+                        <div class="row">
+                            <a href="{% url 'interpret-profile' interpret_Id=interpret.id %}">{{ interpret.nazov }}</a>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="row">
+                        
+                    
+                       
+                </div>
+	</div>
+    <a href="/">Go Back</a>
+</div>
+
+{% endblock content %}

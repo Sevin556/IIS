@@ -1,0 +1,88 @@
+{% extends "festivals/header.html" %}
+{% block content %}
+<div class="container text-center"> 
+    <div class="jumbotron">
+        
+                
+                    <h2>{{ festival.nazov }} interprets:</h2>
+                    
+                        {% if my_interprets %}
+                               <table style="white-space: nowrap; width: 30%; margin: 25px auto;" class="table table-bordered">
+          <thead>
+            <tr>
+             
+              <th scope="col" style="text-align:center;">Name</th>
+              <th scope="col"></th>
+            
+            </tr>
+          </thead>
+          <tbody>
+              {% for interpret in my_interprets %}
+            <tr>
+              
+              <td>{{interpret.nazov}}</td>
+              <td> <a class="btn btn-sm btn-danger" href="{% url 'festivals-delete-interpret-festival' festival_Id=festival.id interpret_Id=interpret.id  %}" style="font-weight: bold;">-</a></td>
+                
+                      </tr>
+                </tbody>
+                      {% endfor %}             
+            </table>
+                        
+                        {% else %}
+                    <div class="text-danger">Interprets are not yet added to your festival add them by clicking on green plus</div>
+                        {% endif %}
+                    
+                    
+                    <hr>
+                    
+                    <h2>Interprets:</h2>
+                    <form class="form-inline" action= "{% url 'festivals-edit-interprets' festival_Id=festival.id %}" method="POST">
+                  {% csrf_token %}
+                    <input type="text" class="form-control" name="interpret_name" placeholder="Look for interpret ...">
+<button class="btn btn-sm btn-primary" type="sumbit">Search <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+  <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+</svg></button>
+              </form>
+                    
+                    
+                    
+                    <a class="btn btn-s btn-primary" style=" margin-top: 15px;" href="{% url 'festivals-create-interpret' festival_Id=festival.id %}">Add new interpret</a>
+                    
+                    {% if interprets %}
+                        
+                    <table style="white-space: nowrap; width: 30%; margin: 25px auto;" class="table table-bordered">
+          <thead>
+            <tr>
+             
+              <th scope="col" style="text-align:center;">Name</th>
+              <th scope="col"></th>
+            
+            </tr>
+          </thead>
+          <tbody>
+              
+              {% for interpret in interprets %}
+            <tr>
+              
+              <td>{{interpret.nazov}}</td>
+              <td> <a class="btn btn-sm btn-success" href="{% url 'festivals-add-interpret-to-festival' festival_Id=festival.id interpret_Id=interpret.id  %}" style="font-weight: bold;">+</a></td>
+             
+                
+            </tr>
+              {% endfor %}
+          </tbody>
+        </table>
+                            
+                        {% endif %}         
+                        
+
+                    
+                    <div class="row">
+                        <a class="btn btn-s btn-success" style="margin-top: 15px;" href="{% url 'festivals-show' festival_Id=festival.id  %}">Done</a>
+                    </div>
+                       
+        </div>      
+	</div>
+
+{% endblock content %}

@@ -1,0 +1,47 @@
+{% extends "festivals/header.html" %}
+{% block content %}
+
+
+<div class="container"> 
+    <div class="thumbnail">
+        <div style="width: 30%; margin: 25px auto;">
+                
+                <div class="caption-full text-center">
+                    <h1>{{ festival.nazov }}</h1>
+                        {% if tickets %}
+                        <form action="{% url 'festivals-buy-ticket' festival_Id=festival.id %}" method="POST">
+                                        {% csrf_token %}
+
+                        {% for ticket,count in tickets %}
+                        <div class="row">
+                                <label for="{{ ticket.typ }}">{{ ticket.typ }}: {{ ticket.cena }}€/piece </label>
+                                <input type="number" min="0" max="4" name="{{ ticket.typ }}" value="0">
+                                <label for="{{ ticket.typ }}">{% if count != 0 %}Only {{ count }} left!!! {% else %} SOLD OUT !!! {% endif %}</label>
+                            </div>
+                        {% endfor %}  
+                            <div class="label label-danger">You can purchase max 4 tickets per type!</div>
+                        {% endif %}
+            {% if not user.is_authenticated %}    
+                    
+                        <div class="form-group">
+                        <label for="email">Email address</label>
+                        <input type="text" class="form-control" name="email" placeholder="example@example.com">
+                        
+                    </div>
+                        
+            {% else %}
+                    <div class="row" style="margin: 25px auto;">
+                    Email: {{ user.email }}
+                    </div> 
+            {% endif %}
+                                
+                                <button class="btn btn-lg btn-primary btn-block" type="sumbit" name="purchase">Reserve</button>
+              </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

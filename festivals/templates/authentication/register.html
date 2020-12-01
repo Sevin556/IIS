@@ -1,0 +1,51 @@
+{% extends "../festivals/header.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+    <div class="container">
+        <div class="jumbotron">
+        <div class="row">
+            <h1 style="text-align: center">Sign up</h1>
+            <div style="width: 30%; margin: 25px auto;">
+                <form action="/register/" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="name">First name</label>
+                        <input type="text" class="form-control" name="name" placeholder="Martin" required>
+                        <label for="surname">Second name</label>
+                        <input type="text" class="form-control" name="surname" placeholder="Halomi" required>
+                        <label for="email">Email address</label>
+                        <input type="text" class="form-control" name="email" placeholder="example@example.com" required>
+                        <label for="password">Password</label>
+                        <input id="pwd_input" 
+                               type="password" 
+                               class="form-control" 
+                               name="password" 
+                               placeholder="Enter password" 
+                               minlength="8"
+                               onchange="check_pwd()"
+                               required>
+                        <p style="font-size: 15px;" id="pwd_rating">Password strength: </p>
+                        <label for="repeat_pwd">Confirm Password</label>
+                        <input id="repeat_pwd" 
+                               type="password" 
+                               class="form-control" 
+                               name="password2" 
+                               placeholder="Enter password again" 
+                               minlength="8"
+                               onchange="cmp_pwd()"
+                               required>
+                        <p id="pwd_match"></p>
+                    </div>
+                    <div class="form-group">
+                        <button id="submit_btn" class="btn btn-lg btn-primary btn-block" type="sumbit" disabled=true>Sign up</button>
+                    </div>
+                </form>
+                <a href="/">Go Back</a>
+            </div>
+        </div>
+    </div>
+  </div>
+</html>
+
+{% endblock content %}

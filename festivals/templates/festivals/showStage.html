@@ -1,0 +1,50 @@
+{% extends "festivals/header.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container" style="text-align: center">
+    <div class="jumbotron">
+        <h1 >Stage: {{ stage.nazov }}</h1>
+         {% if stage.popis %}
+                    {{stage.popis}}
+            {% endif %}
+        <hr>
+        <div style="width: 30%; margin: 25px auto;">
+            {% if program %}
+            
+            <table style="white-space: nowrap" class="table table-bordered">
+          <thead>
+            <tr>
+             
+              <th scope="col" class="text-center">Name</th>
+              <th scope="col" class="text-center">Start</th>
+              <th scope="col" class="text-center">End</th>
+              <th scope="col" class="text-center">Date</th>
+            </tr>
+          </thead>
+          <tbody>
+              {% for interpret, program in program %}
+            <tr>
+              
+              <td>{{interpret.nazov}}</td>
+              <td>{{program.zaciatok.time|date:"H:i"}}</td>
+              <td>{{program.koniec.time|date:"H:i"}}</td>
+              <td>{{program.zaciatok.date|date:"m-d-Y"}}</td>
+                
+            </tr>
+              {% endfor %}
+          </tbody>
+        </table>
+
+         
+            
+            {%else %}
+            Sorry neni
+            {% endif%}
+            
+        </div>
+    </div><a href="{% url 'festivals-show' festival_Id=festival.id %}">Go Back</a>
+</div>
+
+
+{% endblock content %}

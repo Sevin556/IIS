@@ -1,0 +1,16 @@
+{% extends "festivals/header.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <h1 style="text-align: center">Manage program {{ stage.nazov }}</h1>
+        <div style="width: 30%; margin: 25px auto;">
+            
+            <a href="{% url 'festivals-manage-program' festival_Id=festival.id stage_Id=stage.id %}">Go Back</a>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
