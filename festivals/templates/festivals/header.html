@@ -21,7 +21,7 @@
                         <li><a href="/login/">Login</a></li>
                         <li><a href="/register/">Sign Up</a></li>
                     {% else %}
-                        {% if user|has_group:"admin" %}
+                        {% if user|has_group:"admin" or user|has_group:"cashier" %}
                             <li><a href="{% url 'festivals-showUsers' %}">Manage users</a></li>
                         {% endif %}
                         <li><a href="{% url 'festivals-profile' user_Id=user.id %}">Signed In As {{ user.additional.display_name }}</a></li>
