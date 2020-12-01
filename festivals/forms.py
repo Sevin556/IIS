@@ -44,7 +44,7 @@ class NewInterpretForm(ModelForm):
     class Meta:
         model = models.t_interpret
         fields = ['nazov', 'datum_vzniku', 'clenovia', 'albumy']
-         labels ={
+        labels ={
              "nazov" = "Name",
              "datum_vzniku" = "Date of formation",
              "clenovia" = "Members",
