@@ -48,10 +48,10 @@ class NewInterpretForm(ModelForm):
             'datum_vzniku': DateInput(format=('%d/%d/%Y'), attrs={'type': 'date'})
         }
         labels = {
-            'nazov' = 'Name',
-            'datum_vzniku' = 'Date of formation',
-            'clenovia' = 'Members',
-            'albumy' = 'Albums'
+            "nazov" = "Name",
+            "datum_vzniku" = "Date of formation",
+            "clenovia" = "Members",
+            "albumy" = "Albums"
         }
 
         
