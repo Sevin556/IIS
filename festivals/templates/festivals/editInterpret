@@ -1,0 +1,55 @@
+{% extends "../festivals/header.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+    <div class="container">
+        <div class="row">
+            <h1 style="text-align: center">Edit user {{ p_user.email }}</h1>
+            <p></p>
+            <div style="width: 30%; margin: 25px auto;">
+                <form action="{% url 'festivals-edit-profile' user_Id=p_user.id %}" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="name">First name</label>
+                        <input type="text" class="form-control" name="name" value="{{p_user.first_name}}" onchange="unlock_btn()">
+                        <label for="surname">Second name</label>
+                        <input type="text" class="form-control" name="surname" value="{{p_user.last_name}}" onchange="unlock_btn()">
+                        
+                        <label for="password">Current password</label>
+                        <input id="pwd_input_curr" 
+                               type="password" 
+                               class="form-control" 
+                               name="password_old" 
+                               placeholder="Enter password" 
+                               onchange="unlock_btn()">
+                        
+                        <label for="password">New password</label>
+                        <input id="pwd_input" 
+                               type="password" 
+                               class="form-control" 
+                               name="password_new" 
+                               placeholder="Enter password" 
+                               minlength="8"
+                               onchange="check_pwd()">
+                        <p id="pwd_rating">New password strength: </p>
+                        <label for="repeat_pwd">Confirm new password</label>
+                        <input id="repeat_pwd" 
+                               type="password" 
+                               class="form-control" 
+                               name="password2" 
+                               placeholder="Enter password again" 
+                               minlength="8"
+                               onchange="cmp_pwd()">
+                        <p id="pwd_match"></p>
+                    </div>
+                    <div class="form-group">
+                        <button id="submit_btn" class="btn btn-lg btn-primary btn-block" type="sumbit" disabled=true>Confirm Edit</button>
+                    </div>
+                </form>
+                <a href="/">Go Back</a>
+            </div>
+        </div>
+    </div>
+</html>
+
+{% endblock content %}
