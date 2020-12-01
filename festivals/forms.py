@@ -51,7 +51,7 @@ class NewInterpretForm(ModelForm):
             "albumy": "Albums",
         }
         widgets ={
-            'datum_vzniku': DateInput(format=('%d/%d/%Y'), attrs={'type': 'date'})
+            'datum_vzniku': DateInput(format=('%Y'), attrs={'type': 'date'})
         }
        
 
