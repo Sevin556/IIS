@@ -3,7 +3,7 @@
 {% block content %}
 <div class="container">
     <div class="row">
-        <h1 style="text-align: center">Edit {{interpret.nazov}}</h1>
+        <h1 style="text-align: center">Edit interpret: {{interpret.nazov}}</h1>
         <div style="width: 30%; margin: 25px auto;">
             <form action="{% url 'interpret-edit' interpret_Id=interpret.id %}" method="POST">
                 {% csrf_token %}
