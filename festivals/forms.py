@@ -44,7 +44,7 @@ class NewInterpretForm(ModelForm):
     class Meta:
         model = models.t_interpret
         fields = ['nazov', 'datum_vzniku', 'clenovia', 'albumy']
-         widgets ={
+        widgets ={
             'datum_vzniku': DateInput(format=('%d/%d/%Y'), attrs={'type': 'date'})
         }
 
