@@ -4,7 +4,7 @@
 {% block content %}
 <div class="container">
      <header class="jumbotron">
-         <div class="container">
+         
              <h1>Welcome To FestivalDealer!</h1>
            
              <p>View our hand-picked festivals from all over the world</p>
@@ -16,7 +16,7 @@
                 {% endif %}
                  
              </p>
-         </div>
+         
      </header>
     <form style="margin-bottom: 20px; text-align: center;" class="form-inline" action="{% url 'festivals-home' %}" method="POST">
             {% csrf_token %}
