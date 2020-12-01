@@ -45,4 +45,5 @@ urlpatterns = [
     path('interprets/', views.showInterprets, name='interprets-show'),
     path('create/interpret/', views.createInterpret, name='create-interpret'),
     path('interpret/profile/<int:interpret_Id>/', views.interpretProfile, name="interpret-profile"),
+    path('interpret/profile/edit/<int:interpret_Id>/', views.editInterpret, name="interpret-edit"),
 ]
