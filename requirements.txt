@@ -100,7 +100,7 @@ termcolor==1.1.0
 terminado==0.9.1
 testpath==0.4.4
 threadpoolctl==2.1.0
-tifffile==2020.10.1
+tifffile==2020.9.3
 toml==0.10.2
 tornado==6.1
 tqdm==4.51.0
