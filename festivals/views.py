@@ -732,7 +732,7 @@ def createInterpret(request):
         form = NewInterpretForm()
         return render(request, 'festivals/createInterprets.html', {'form': form})
     
- def editInterpret(request, interpret_Id):
+def editInterpret(request, interpret_Id):
     interpret = t_interpret.objects.get(id=interpret_Id)
     if request.method == 'POST':
             form = NewInterpretForm(request.POST, instance=interpret)
