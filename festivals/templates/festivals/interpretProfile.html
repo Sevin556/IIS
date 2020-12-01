@@ -13,8 +13,8 @@
         <h3>Albums:</h3>
         {{interpret.albumy}}
         {% endif %}
-        {% if request.user|has_group:"admin" or request.user|has_group:"organizer" %}
-                        <a class="btn btn-s btn-warning"href="{% url 'interpret-edit' interpret_Id=interpret.id %}">Edit</a>
+        {% if user|has_group:"admin" or user|has_group:"organizer" %}
+                        <div class="row"><a class="btn btn-s btn-warning"href="{% url 'interpret-edit' interpret_Id=interpret.id %}">Edit</a></div>
         {% endif %}
         {% if festivals %}
         <h3>Performing in festivals: </h3>
